@@ -196,7 +196,7 @@ timeline
 | **Primary Service** | Analog Voice | Digital Voice, SMS, basic data | Mobile Web, multimedia | High-Speed Mobile Broadband | eMBB, URLLC, mMTC | AI-RAN, RedCap, Satellite NTN |
 | **Multiple Access** | FDMA | TDMA / CDMA | WCDMA / CDMA2000 | OFDMA (DL) / SC-FDMA (UL) | Scalable OFDMA | Scalable OFDMA + AI scheduling |
 | **Channel Bandwidth** | 30 kHz (AMPS) | 200 kHz (GSM) | 5 MHz (UMTS) | 1.4 – 20 MHz (up to 100 MHz CA) | Up to 100 MHz (Sub-6) / 400 MHz (mmWave) | Multi-carrier aggregation + NTN |
-| **Peak Data Rate** | ~2.4 kbps | 9.6 kbps (GSM) $\to$ 384 kbps (EDGE) | 2 Mbps (UMTS) $\to$ 42 Mbps (HSPA+) | 100 Mbps – 1 Gbps | Up to 10 – 20 Gbps | > 10 Gbps sustained |
+| **Peak Data Rate** | ~2.4 kbps | 9.6 kbps (GSM) → 384 kbps (EDGE) | 2 Mbps (UMTS) → 42 Mbps (HSPA+) | 100 Mbps – 1 Gbps | Up to 10 – 20 Gbps | > 10 Gbps sustained |
 | **End-to-End Latency** | N/A (Analog) | ~300 – 1000 ms | ~100 – 200 ms | 20 – 50 ms | 1 – 4 ms (sub-ms in URLLC) | Deterministic sub-ms |
 | **Core Network** | Analog PSTN Switches | Circuit-Switched (SS7) + SGSN/GGSN | Dual Core (CS voice + PS packet) | Pure All-IP Evolved Packet Core (EPC) | Service-Based Architecture (5GC SBA) | Autonomous AI-driven Cloud-Native Core |
 | **Security Mechanism** | None (cloning, eavesdropping) | Symmetric A5 encryption, SIM card | Mutual authentication (USIM), KASUMI | AES-128, IPsec, EPS-AKA | 256-bit encryption, SUPI encryption, 5G-AKA | Zero-Trust, quantum-resistant algorithms |
@@ -225,9 +225,9 @@ graph TD
     C1 -. "Reuse Distance D = R * sqrt(3N)" .-> A1
 ```
 
-- **Frequency Reuse Factor ($N$):** A cluster of $N$ cells uses the total available spectrum. The geometry of regular hexagons dictates that $N$ must satisfy:
+- **Frequency Reuse Factor** ($N$): A cluster of $N$ cells uses the total available spectrum. The geometry of regular hexagons dictates that $N$ must satisfy:
   $$N = i^2 + i \cdot j + j^2 \quad (i, j \in \mathbb{N}_0) \implies N \in \{1, 3, 4, 7, 9, 12, 19, \dots\}$$
-- **Co-Channel Reuse Ratio ($Q$):**
+- **Co-Channel Reuse Ratio** ($Q$):
   $$Q = \frac{D}{R} = \sqrt{3N}$$
   Where $D$ is the distance between co-channel cell centers, and $R$ is the cell radius. A larger $N$ increases distance $D$, reducing **Co-Channel Interference (CCI)**, but divides total bandwidth across more cells, reducing local capacity.
 
@@ -430,7 +430,7 @@ Transmitter (Pt)                                             Receiver (Pr)
 
 #### The Four Fundamental Channel Degradations (Slide 20)
 
-1. **Path Loss ($PL$):**
+1. **Path Loss** ($PL$):
    - The deterministic reduction in power density as an electromagnetic wave expands in space.
    - Governed by the **Friis Free-Space Transmission Equation**:
      $$P_r = P_t \cdot G_t \cdot G_r \cdot \left(\frac{\lambda}{4\pi d}\right)^2 = P_t \cdot G_t \cdot G_r \cdot \left(\frac{c}{4\pi f d}\right)^2$$
@@ -442,7 +442,7 @@ Transmitter (Pt)                                             Receiver (Pr)
      - Dense urban with obstructions: $n = 4.0 - 6.0$
      - Indoor Line-of-Sight (waveguide corridor effect): $n = 1.6 - 1.8$
 
-2. **Shadowing ($X_\sigma$):**
+2. **Shadowing** ($X_\sigma$):
    - Large-scale signal attenuation caused by massive geographic objects (buildings, hills, overpasses) obstructing the main Fresnel zone.
    - Modeled statistically as a **Log-Normal Random Variable**:
      $$X_\sigma \sim \mathcal{N}(0, \sigma^2_{\text{dB}})$$
@@ -457,7 +457,7 @@ Transmitter (Pt)                                             Receiver (Pr)
      $$r(t) = \sum_{i=1}^{N} a_i(t) \cos(2\pi f_c t + \phi_i(t))$$
    - When phases align ($\Delta \phi = 0^\circ$), they interfere **constructively** (signal peak); when out of phase ($\Delta \phi = 180^\circ$), they interfere **destructively** (deep signal null, attenuation of 30–40 dB over centimeters!).
 
-4. **Doppler Shift ($f_d$):**
+4. **Doppler Shift** ($f_d$):
    - Frequency displacement caused by relative velocity vector $v$ at angle $\theta$ relative to the arriving wave:
      $$f_d = \frac{v}{\lambda} \cos(\theta) = \frac{v \cdot f_c}{c} \cos(\theta)$$
    - Generates spectral broadening (Doppler spread), causing rapid phase dispersion in mobile environments.
@@ -494,19 +494,19 @@ Channel Gain (log scale)
 > **Professor's In-Depth Note:**  
 > In advanced mobile communications exams, the professor frequently tests the duality between the time domain and frequency domain channel characteristics:
 
-1. **Multipath Delay Spread ($\Delta \tau$) $\longleftrightarrow$ Coherence Bandwidth ($B_c$):**
+1. **Multipath Delay Spread** ($\Delta \tau$) $\longleftrightarrow$ **Coherence Bandwidth** ($B_c$):
    - The multipath delay spread $\Delta \tau = \tau_{\max} - \tau_{\min}$ is the time difference between the earliest and latest arriving multipath components.
-   - **Coherence Bandwidth ($B_c$):** The frequency span over which two signal components experience correlated fading:
+   - **Coherence Bandwidth** ($B_c$): The frequency span over which two signal components experience correlated fading:
      $$B_c \approx \frac{1}{2\pi \cdot \Delta \tau} \quad \left(\text{or } \frac{1}{5 \cdot \Delta \tau}\right)$$
-   - *Flat Fading ($B_{\text{signal}} \ll B_c$):* All frequency components in the signal fade together. No Inter-Symbol Interference (ISI).
-   - *Frequency-Selective Fading ($B_{\text{signal}} \gg B_c$):* Different frequency components experience different attenuation and nulls. Causes severe ISI!
+   - **Flat Fading** ($B_{\text{signal}} \ll B_c$): All frequency components in the signal fade together. No Inter-Symbol Interference (ISI).
+   - **Frequency-Selective Fading** ($B_{\text{signal}} \gg B_c$): Different frequency components experience different attenuation and nulls. Causes severe ISI!
    - **Why OFDM is used in 4G/5G/Wi-Fi:** OFDM breaks a wideband frequency-selective channel into thousands of narrow orthogonal subcarriers, each having bandwidth $\Delta f \ll B_c$, turning a complex frequency-selective fading channel into simple flat-fading sub-channels!
 
-2. **Doppler Spread ($f_d$) $\longleftrightarrow$ Coherence Time ($T_c$):**
-   - **Coherence Time ($T_c$):** The time duration over which the channel impulse response remains essentially invariant:
+2. **Doppler Spread** ($f_d$) $\longleftrightarrow$ **Coherence Time** ($T_c$):
+   - **Coherence Time** ($T_c$): The time duration over which the channel impulse response remains essentially invariant:
      $$T_c \approx \frac{1}{f_d} \approx \frac{c}{v \cdot f_c}$$
-   - *Slow Fading ($T_{\text{symbol}} \ll T_c$):* Channel remains static across multiple symbol transmissions.
-   - *Fast Fading ($T_{\text{symbol}} \gg T_c$):* Channel changes significantly while a single symbol is in flight, distorting the waveform shape.
+   - **Slow Fading** ($T_{\text{symbol}} \ll T_c$): Channel remains static across multiple symbol transmissions.
+   - **Fast Fading** ($T_{\text{symbol}} \gg T_c$): Channel changes significantly while a single symbol is in flight, distorting the waveform shape.
 
 #### Engineering Applications of Channel Gain (Slide 21)
 
@@ -534,7 +534,7 @@ sequenceDiagram
    $$\text{SNR} = \frac{P_r}{N_0 \cdot B} = \frac{P_t \cdot G}{N_0 \cdot B}$$
    According to the **Shannon-Hartley Theorem**, maximum theoretical channel capacity $C$ is strictly bounded by:
    $$C = B \cdot \log_2(1 + \text{SNR}) = B \cdot \log_2\left(1 + \frac{P_t \cdot G}{N_0 \cdot B}\right) \quad [\text{bits/second}]$$
-2. **Adaptive Modulation & Coding (AMC):** Dynamic rate adaptation matching modulation order (QPSK $\to$ 16-QAM $\to$ 64-QAM $\to$ 256-QAM $\to$ 1024-QAM) to instantaneous channel gain.
+2. **Adaptive Modulation & Coding (AMC):** Dynamic rate adaptation matching modulation order (QPSK → 16-QAM → 64-QAM → 256-QAM → 1024-QAM) to instantaneous channel gain.
 3. **Power Control:** Downlink and uplink power control adjusting transmit power to combat near-far problems and preserve mobile battery.
 4. **Beamforming:** Phased array antenna elements adjust phase shifts $\Delta \theta_k$ based on channel state information (CSI) to direct narrow electromagnetic beams directly toward the target receiver, boosting effective channel gain.
 
@@ -723,12 +723,12 @@ graph TD
 > **Explanation:** Around 2005, mobile internet was slow, expensive, and limited; individuals relied on standalone digital cameras/camcorders, and devices were not constantly online.
 
 #### Q4. Which of the following best models the modern growth cycle of mobile internet demand described in Slide 6?
-- (A) More Users $\to$ More Data per User $\to$ Always Connected $\to$ Higher Network Demand
-- (B) Lower Data Rates $\to$ Fewer Devices $\to$ Lower Carrier Costs $\to$ Higher Demand
-- (C) Less Coverage $\to$ Increased Latency $\to$ Higher Spectral Efficiency $\to$ Lower Cost
-- (D) More Spectrum $\to$ Less Hardware $\to$ Single-User Access $\to$ Diminished Demand
+- (A) More Users → More Data per User → Always Connected → Higher Network Demand
+- (B) Lower Data Rates → Fewer Devices → Lower Carrier Costs → Higher Demand
+- (C) Less Coverage → Increased Latency → Higher Spectral Efficiency → Lower Cost
+- (D) More Spectrum → Less Hardware → Single-User Access → Diminished Demand
 > **Answer: (A)**  
-> **Explanation:** Slide 6 illustrates the 4-pillar cycle: More Users $\to$ More Data $\to$ Always Connected $\to$ Higher Network Demand.
+> **Explanation:** Slide 6 illustrates the 4-pillar cycle: More Users → More Data → Always Connected → Higher Network Demand.
 
 #### Q5. What was the primary communication service provided by first-generation (1G) cellular networks?
 - (A) Packet-switched digital data
@@ -779,12 +779,12 @@ graph TD
 > **Explanation:** 4G LTE abandoned traditional single-carrier CDMA in favor of OFDMA on the downlink and SC-FDMA on the uplink.
 
 #### Q11. According to the GSMA industry outlook presented in Slide 14, what was the approximate mobile industry revenue during the 4G era around 2021?
-- (A) $300 Billion
-- (B) $500 Billion
-- (C) $800 Billion
-- (D) $1.0 Trillion
+- (A) \$300 Billion
+- (B) \$500 Billion
+- (C) \$800 Billion
+- (D) \$1.0 Trillion
 > **Answer: (D)**  
-> **Explanation:** Slide 14 documents that global mobile revenue reached approximately $1.0 Trillion with 8 Billion connections during the 4G peak around 2021.
+> **Explanation:** Slide 14 documents that global mobile revenue reached approximately \$1.0 Trillion with 8 Billion connections during the 4G peak around 2021.
 
 #### Q12. What is the projected number of total global mobile connections by 2025 as shown in Slide 14?
 - (A) 800 Million
@@ -792,7 +792,7 @@ graph TD
 - (C) 8 Billion
 - (D) 10 Billion
 > **Answer: (D)**  
-> **Explanation:** Slide 14 estimates total mobile connections reaching approximately 10 Billion in 2025, generating over $1.1 Trillion in revenue.
+> **Explanation:** Slide 14 estimates total mobile connections reaching approximately 10 Billion in 2025, generating over \$1.1 Trillion in revenue.
 
 #### Q13. What is the current commercial deployment status of 6G cellular technology as of 2025?
 - (A) Fully deployed in major metropolitan centers worldwide
@@ -1107,10 +1107,10 @@ graph TD
 ### Section C: Internet of Things (IoT) & Connectivity Spectrum (Q51 – Q75)
 
 #### Q51. What is the fundamental operational sequence of IoT systems described in Slide 17?
-- (A) Buy $\to$ Sell $\to$ Trade
-- (B) Sense $\to$ Connect $\to$ Analyze & Act
-- (C) Transmit $\to$ Forget $\to$ Repeat
-- (D) Encrypt $\to$ Delete $\to$ Restore
+- (A) Buy → Sell → Trade
+- (B) Sense → Connect → Analyze & Act
+- (C) Transmit → Forget → Repeat
+- (D) Encrypt → Delete → Restore
 > **Answer: (B)**  
 > **Explanation:** Slide 17 outlines the 3-step operational flow: 1) Sense (collect data), 2) Connect (send through network), 3) Analyze & Act (software evaluates data and triggers actions).
 
@@ -1244,7 +1244,7 @@ graph TD
 - (C) Channel gain has no mathematical relationship to received power
 - (D) Channel gain only affects the phase of the signal, never the amplitude
 > **Answer: (B)**  
-> **Explanation:** Slides 19 and 20 emphasize: "Higher channel gain $\to$ stronger received signal; Lower channel gain $\to$ more attenuation and weaker reception."
+> **Explanation:** Slides 19 and 20 emphasize: "Higher channel gain → stronger received signal; Lower channel gain → more attenuation and weaker reception."
 
 #### Q68. Which physical propagation phenomenon describes the reduction in signal power density solely as a function of the distance separating transmitter and receiver?
 - (A) Doppler Shift
@@ -1332,7 +1332,7 @@ graph TD
 - (C) Zero probability of transmission error
 - (D) Immediate upgrade to 6G
 > **Answer: (B)**  
-> **Explanation:** Slide 21 highlights: "Weaker Channel Gain $\to$ Lower Received Signal $\to$ Poorer Link Quality."
+> **Explanation:** Slide 21 highlights: "Weaker Channel Gain → Lower Received Signal → Poorer Link Quality."
 
 #### Q79. Why is Channel State Information (CSI) / Channel Gain critical for Beamforming antenna arrays?
 - (A) To determine which user to bill for phone calls
@@ -1440,7 +1440,7 @@ graph TD
 - (C) Mesh
 - (D) Cellular
 > **Answer: (B)**  
-> **Explanation:** The table in Slide 24 specifies: Central controller $\to$ Infrastructure: Yes; Ad Hoc: No; Mesh: Partial-distributed.
+> **Explanation:** The table in Slide 24 specifies: Central controller → Infrastructure: Yes; Ad Hoc: No; Mesh: Partial-distributed.
 
 #### Q92. What are the four fundamental elements of a wireless network identified in Slide 25?
 - (A) Monitor, Keyboard, Mouse, Printer
@@ -1536,7 +1536,7 @@ graph TD
 - (C) Infrastructure requires no planning; Ad Hoc requires years of zoning permits
 - (D) Both are identical in deployment style
 > **Answer: (A)**  
-> **Explanation:** Slide 24 table: Deployment style $\to$ Infrastructure: Planned; Ad Hoc: Fast temporary; Mesh: Scalable coverage.
+> **Explanation:** Slide 24 table: Deployment style → Infrastructure: Planned; Ad Hoc: Fast temporary; Mesh: Scalable coverage.
 
 #### Q104. Which of the following is considered a single point of failure in an infrastructure-based Wi-Fi network?
 - (A) An idle laptop in another room
