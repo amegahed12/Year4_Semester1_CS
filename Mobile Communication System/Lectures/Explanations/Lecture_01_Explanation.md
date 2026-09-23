@@ -105,7 +105,9 @@ graph TD
 #### The Electromagnetic Spectrum Trade-Off: Frequency vs. Propagation
 
 The fundamental relation governing all wireless transmission is:
+
 $$c = f \cdot \lambda \implies \lambda = \frac{c}{f}$$
+
 Where:
 - $c \approx 3 \times 10^8 \text{ m/s}$ (speed of light in vacuum/air),
 - $f$ is the carrier frequency (Hz),
@@ -225,11 +227,16 @@ graph TD
     C1 -. "Reuse Distance D = R * sqrt(3N)" .-> A1
 ```
 
-- **Frequency Reuse Factor** ($N$): A cluster of $N$ cells uses the total available spectrum. The geometry of regular hexagons dictates that $N$ must satisfy:
-  $$N = i^2 + i \cdot j + j^2 \quad (i, j \in \mathbb{N}_0) \implies N \in \{1, 3, 4, 7, 9, 12, 19, \dots\}$$
-- **Co-Channel Reuse Ratio** ($Q$):
-  $$Q = \frac{D}{R} = \sqrt{3N}$$
-  Where $D$ is the distance between co-channel cell centers, and $R$ is the cell radius. A larger $N$ increases distance $D$, reducing **Co-Channel Interference (CCI)**, but divides total bandwidth across more cells, reducing local capacity.
+##### Frequency Reuse Factor ($N$)
+A cluster of $N$ cells uses the total available spectrum. The geometry of regular hexagons dictates that $N$ must satisfy:
+
+$$N = i^2 + i \cdot j + j^2 \quad (i, j \in \mathbb{N}_0) \implies N \in \{1, 3, 4, 7, 9, 12, 19, \dots\}$$
+
+##### Co-Channel Reuse Ratio ($Q$)
+
+$$Q = \frac{D}{R} = \sqrt{3N}$$
+
+Where $D$ is the distance between co-channel cell centers, and $R$ is the cell radius. A larger $N$ increases distance $D$, reducing **Co-Channel Interference (CCI)**, but divides total bandwidth across more cells, reducing local capacity.
 
 #### The 5G Service Triangle: eMBB, URLLC, mMTC (Slide 16)
 
@@ -413,9 +420,13 @@ Data Rate / Power
 ### Module 8: Wireless Propagation Characteristics & Channel Gain (Slides 19–21)
 
 #### Mathematical Definition of Channel Gain ($G$)
+
 The **Channel Gain** $G$ (or power transfer ratio) is defined as the ratio of received signal power ($P_r$) to transmitted signal power ($P_t$):
+
 $$G = \frac{P_r}{P_t}$$
+
 Expressed in decibels (dB):
+
 $$G_{\text{dB}} = 10 \log_{10}(G) = 10 \log_{10}(P_r) - 10 \log_{10}(P_t) = P_{r,\text{dBm}} - P_{t,\text{dBm}} = - \text{Path Loss}_{\text{dB}}$$
 
 ```
@@ -430,37 +441,50 @@ Transmitter (Pt)                                             Receiver (Pr)
 
 #### The Four Fundamental Channel Degradations (Slide 20)
 
-1. **Path Loss** ($PL$):
-   - The deterministic reduction in power density as an electromagnetic wave expands in space.
-   - Governed by the **Friis Free-Space Transmission Equation**:
-     $$P_r = P_t \cdot G_t \cdot G_r \cdot \left(\frac{\lambda}{4\pi d}\right)^2 = P_t \cdot G_t \cdot G_r \cdot \left(\frac{c}{4\pi f d}\right)^2$$
-   - In practical terrestrial environments, path loss follows the empirical log-distance model:
-     $$PL(d)_{\text{dB}} = PL(d_0)_{\text{dB}} + 10 \cdot n \cdot \log_{10}\left(\frac{d}{d_0}\right)$$
-     Where $n$ is the **Path Loss Exponent**:
-     - Free space: $n = 2.0$
-     - Urban macrocell: $n = 3.5 - 4.5$
-     - Dense urban with obstructions: $n = 4.0 - 6.0$
-     - Indoor Line-of-Sight (waveguide corridor effect): $n = 1.6 - 1.8$
+##### 1. Path Loss ($PL$)
+The deterministic reduction in power density as an electromagnetic wave expands in space.
 
-2. **Shadowing** ($X_\sigma$):
-   - Large-scale signal attenuation caused by massive geographic objects (buildings, hills, overpasses) obstructing the main Fresnel zone.
-   - Modeled statistically as a **Log-Normal Random Variable**:
-     $$X_\sigma \sim \mathcal{N}(0, \sigma^2_{\text{dB}})$$
-     Where the standard deviation $\sigma_{\text{dB}}$ typically ranges from 4 dB to 12 dB depending on terrain clutter.
+**Friis Free-Space Transmission Equation:**
 
-3. **Multipath Fading:**
-   - Arises from electromagnetic waves encountering physical boundaries:
-     - **Reflection:** Surface dimensions $\gg \lambda$ (e.g., building walls, ground plane).
-     - **Diffraction:** Wave encounters sharp edges/corners, bending into the geometric shadow region (Huygens' Principle).
-     - **Scattering:** Surface dimensions $\le \lambda$ (e.g., foliage, lampposts, gravel).
-   - Multiple delayed wavefronts arrive at the receiver with differing phase shifts $\phi_i$:
-     $$r(t) = \sum_{i=1}^{N} a_i(t) \cos(2\pi f_c t + \phi_i(t))$$
-   - When phases align ($\Delta \phi = 0^\circ$), they interfere **constructively** (signal peak); when out of phase ($\Delta \phi = 180^\circ$), they interfere **destructively** (deep signal null, attenuation of 30–40 dB over centimeters!).
+$$P_r = P_t \cdot G_t \cdot G_r \cdot \left(\frac{\lambda}{4\pi d}\right)^2 = P_t \cdot G_t \cdot G_r \cdot \left(\frac{c}{4\pi f d}\right)^2$$
 
-4. **Doppler Shift** ($f_d$):
-   - Frequency displacement caused by relative velocity vector $v$ at angle $\theta$ relative to the arriving wave:
-     $$f_d = \frac{v}{\lambda} \cos(\theta) = \frac{v \cdot f_c}{c} \cos(\theta)$$
-   - Generates spectral broadening (Doppler spread), causing rapid phase dispersion in mobile environments.
+In practical terrestrial environments, path loss follows the **Empirical Log-Distance Model**:
+
+$$PL(d)_{\text{dB}} = PL(d_0)_{\text{dB}} + 10 \cdot n \cdot \log_{10}\left(\frac{d}{d_0}\right)$$
+
+Where $n$ is the **Path Loss Exponent**:
+- **Free space:** $n = 2.0$
+- **Urban macrocell:** $n = 3.5 - 4.5$
+- **Dense urban with obstructions:** $n = 4.0 - 6.0$
+- **Indoor Line-of-Sight (waveguide corridor effect):** $n = 1.6 - 1.8$
+
+##### 2. Shadowing ($X_\sigma$)
+Large-scale signal attenuation caused by massive geographic objects (buildings, hills, overpasses) obstructing the main Fresnel zone.
+
+Modeled statistically as a **Log-Normal Random Variable**:
+
+$$X_\sigma \sim \mathcal{N}(0, \sigma^2_{\text{dB}})$$
+
+Where the standard deviation $\sigma_{\text{dB}}$ typically ranges from 4 dB to 12 dB depending on terrain clutter.
+
+##### 3. Multipath Fading
+Arises from electromagnetic waves encountering physical boundaries:
+- **Reflection:** Surface dimensions $\gg \lambda$ (e.g., building walls, ground plane).
+- **Diffraction:** Wave encounters sharp edges/corners, bending into the geometric shadow region (Huygens' Principle).
+- **Scattering:** Surface dimensions $\le \lambda$ (e.g., foliage, lampposts, gravel).
+
+Multiple delayed wavefronts arrive at the receiver with differing phase shifts $\phi_i$:
+
+$$r(t) = \sum_{i=1}^{N} a_i(t) \cos(2\pi f_c t + \phi_i(t))$$
+
+When phases align ($\Delta \phi = 0^\circ$), they interfere **constructively** (signal peak); when out of phase ($\Delta \phi = 180^\circ$), they interfere **destructively** (deep signal null, attenuation of 30–40 dB over centimeters!).
+
+##### 4. Doppler Shift ($f_d$)
+Frequency displacement caused by relative velocity vector $v$ at angle $\theta$ relative to the arriving wave:
+
+$$f_d = \frac{v}{\lambda} \cos(\theta) = \frac{v \cdot f_c}{c} \cos(\theta)$$
+
+Generates spectral broadening (Doppler spread), causing rapid phase dispersion in mobile environments.
 
 #### Large-Scale vs. Small-Scale Fading Decomposition
 
@@ -494,19 +518,24 @@ Channel Gain (log scale)
 > **Professor's In-Depth Note:**  
 > In advanced mobile communications exams, the professor frequently tests the duality between the time domain and frequency domain channel characteristics:
 
-1. **Multipath Delay Spread** ($\Delta \tau$) $\longleftrightarrow$ **Coherence Bandwidth** ($B_c$):
-   - The multipath delay spread $\Delta \tau = \tau_{\max} - \tau_{\min}$ is the time difference between the earliest and latest arriving multipath components.
-   - **Coherence Bandwidth** ($B_c$): The frequency span over which two signal components experience correlated fading:
-     $$B_c \approx \frac{1}{2\pi \cdot \Delta \tau} \quad \left(\text{or } \frac{1}{5 \cdot \Delta \tau}\right)$$
-   - **Flat Fading** ($B_{\text{signal}} \ll B_c$): All frequency components in the signal fade together. No Inter-Symbol Interference (ISI).
-   - **Frequency-Selective Fading** ($B_{\text{signal}} \gg B_c$): Different frequency components experience different attenuation and nulls. Causes severe ISI!
-   - **Why OFDM is used in 4G/5G/Wi-Fi:** OFDM breaks a wideband frequency-selective channel into thousands of narrow orthogonal subcarriers, each having bandwidth $\Delta f \ll B_c$, turning a complex frequency-selective fading channel into simple flat-fading sub-channels!
+##### Pillar 1: Multipath Delay Spread ($\Delta \tau$) $\longleftrightarrow$ Coherence Bandwidth ($B_c$)
+The multipath delay spread $\Delta \tau = \tau_{\max} - \tau_{\min}$ is the time difference between the earliest and latest arriving multipath components.
 
-2. **Doppler Spread** ($f_d$) $\longleftrightarrow$ **Coherence Time** ($T_c$):
-   - **Coherence Time** ($T_c$): The time duration over which the channel impulse response remains essentially invariant:
-     $$T_c \approx \frac{1}{f_d} \approx \frac{c}{v \cdot f_c}$$
-   - **Slow Fading** ($T_{\text{symbol}} \ll T_c$): Channel remains static across multiple symbol transmissions.
-   - **Fast Fading** ($T_{\text{symbol}} \gg T_c$): Channel changes significantly while a single symbol is in flight, distorting the waveform shape.
+**Coherence Bandwidth ($B_c$):** The frequency span over which two signal components experience correlated fading:
+
+$$B_c \approx \frac{1}{2\pi \cdot \Delta \tau} \quad \left(\text{or } \frac{1}{5 \cdot \Delta \tau}\right)$$
+
+- **Flat Fading** ($B_{\text{signal}} \ll B_c$): All frequency components in the signal fade together. No Inter-Symbol Interference (ISI).
+- **Frequency-Selective Fading** ($B_{\text{signal}} \gg B_c$): Different frequency components experience different attenuation and nulls. Causes severe ISI!
+- **Why OFDM is used in 4G/5G/Wi-Fi:** OFDM breaks a wideband frequency-selective channel into thousands of narrow orthogonal subcarriers, each having bandwidth $\Delta f \ll B_c$, turning a complex frequency-selective fading channel into simple flat-fading sub-channels!
+
+##### Pillar 2: Doppler Spread ($f_d$) $\longleftrightarrow$ Coherence Time ($T_c$)
+**Coherence Time ($T_c$):** The time duration over which the channel impulse response remains essentially invariant:
+
+$$T_c \approx \frac{1}{f_d} \approx \frac{c}{v \cdot f_c}$$
+
+- **Slow Fading** ($T_{\text{symbol}} \ll T_c$): Channel remains static across multiple symbol transmissions.
+- **Fast Fading** ($T_{\text{symbol}} \gg T_c$): Channel changes significantly while a single symbol is in flight, distorting the waveform shape.
 
 #### Engineering Applications of Channel Gain (Slide 21)
 
@@ -530,13 +559,23 @@ sequenceDiagram
     end
 ```
 
-1. **Signal-to-Noise Ratio (SNR) Calculation:**
-   $$\text{SNR} = \frac{P_r}{N_0 \cdot B} = \frac{P_t \cdot G}{N_0 \cdot B}$$
-   According to the **Shannon-Hartley Theorem**, maximum theoretical channel capacity $C$ is strictly bounded by:
-   $$C = B \cdot \log_2(1 + \text{SNR}) = B \cdot \log_2\left(1 + \frac{P_t \cdot G}{N_0 \cdot B}\right) \quad [\text{bits/second}]$$
-2. **Adaptive Modulation & Coding (AMC):** Dynamic rate adaptation matching modulation order (QPSK → 16-QAM → 64-QAM → 256-QAM → 1024-QAM) to instantaneous channel gain.
-3. **Power Control:** Downlink and uplink power control adjusting transmit power to combat near-far problems and preserve mobile battery.
-4. **Beamforming:** Phased array antenna elements adjust phase shifts $\Delta \theta_k$ based on channel state information (CSI) to direct narrow electromagnetic beams directly toward the target receiver, boosting effective channel gain.
+##### 1. Signal-to-Noise Ratio (SNR) & Shannon Capacity Bound
+The received SNR is directly proportional to channel gain $G$:
+
+$$\text{SNR} = \frac{P_r}{N_0 \cdot B} = \frac{P_t \cdot G}{N_0 \cdot B}$$
+
+According to the **Shannon-Hartley Theorem**, maximum theoretical channel capacity $C$ is strictly bounded by:
+
+$$C = B \cdot \log_2(1 + \text{SNR}) = B \cdot \log_2\left(1 + \frac{P_t \cdot G}{N_0 \cdot B}\right) \quad [\text{bits/second}]$$
+
+##### 2. Adaptive Modulation & Coding (AMC)
+Dynamic rate adaptation matching modulation order (QPSK → 16-QAM → 64-QAM → 256-QAM → 1024-QAM) to instantaneous channel gain.
+
+##### 3. Power Control
+Downlink and uplink power control adjusting transmit power to combat near-far problems and preserve mobile battery.
+
+##### 4. Beamforming
+Phased array antenna elements adjust phase shifts $\Delta \theta_k$ based on channel state information (CSI) to direct narrow electromagnetic beams directly toward the target receiver, boosting effective channel gain.
 
 ---
 
