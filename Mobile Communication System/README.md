@@ -31,7 +31,7 @@ Mobile Communication System/
 
 | # | Date | Topic / Title | Slide PDF | Explanation & Notes | Status |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-| 01 | 2026-09-22 | *(Lecture 1)* | [Lecture_1.pdf](Lectures/PDFs/Lecture_1.pdf) | *(To be generated)* | ⏳ Pending Explanation |
+| 01 | 2026-09-22 | Introduction to Wireless Communications | [Lecture_1.pdf](Lectures/PDFs/Lecture_1.pdf) | [Lecture_01_Explanation.md](Lectures/Explanations/Lecture_01_Explanation.md) | ✅ Completed (Notes + 105 MCQs) |
 
 ---
 
