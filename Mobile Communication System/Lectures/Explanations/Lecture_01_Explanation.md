@@ -124,26 +124,24 @@ Low Frequency (Sub-1 GHz: 700 - 900 MHz)             High Frequency (mmWave: 24 
 #### The Six Driving Factors of Wireless Dominance (Slides 8–9)
 
 ```mermaid
-mindmap
-  root((Wireless Dominance))
-    Mobility & Convenience
-      Untethered connectivity anywhere, anytime
-      Essential for handhelds, laptops, wearables
-    Explosion of Devices
-      Billions of smartphones, tablets, vehicles
-      Pervasive IoT: smart meters, appliances, smart cities
-    High-Speed Air Interfaces
-      Wi-Fi 6/7 & 5G multi-gigabit throughput
-      Sub-millisecond latencies rivaling copper/fiber
-    Cost-Effective Infrastructure
-      Avoids prohibitive civil trenching & cabling costs
-      Rapid scalable rollout across rural & dense urban terrain
-    Modern Application Demands
-      4K/8K real-time streaming, cloud gaming
-      Augmented / Virtual Reality (AR/VR) & spatial computing
-    Enterprise & Industrial Digitization
-      Automated Guided Vehicles (AGVs) in logistics
-      Industry 4.0 wireless robotics & telemetry
+graph TD
+    Root(["🌟 Key Drivers of Wireless Dominance"]):::central
+
+    D1["📱 Mobility & Convenience<br/>• Untethered anywhere, anytime connectivity<br/>• Essential for handhelds, laptops, wearables"]
+    D2["🌐 Explosion of Devices<br/>• Billions of smartphones, tablets, vehicles<br/>• Pervasive IoT: smart meters, smart cities"]
+    D3["⚡ High-Speed Air Interfaces<br/>• Wi-Fi 6/7 & 5G multi-gigabit throughput<br/>• Sub-millisecond latencies rivaling copper/fiber"]
+    D4["🏗️ Cost-Effective Infrastructure<br/>• Avoids prohibitive civil trenching & cabling costs<br/>• Rapid scalable rollout across rural & dense urban terrain"]
+    D5["🎮 Modern Application Demands<br/>• 4K/8K real-time streaming, cloud gaming<br/>• Augmented / Virtual Reality (AR/VR) & spatial computing"]
+    D6["🏭 Enterprise & Industrial Digitization<br/>• Automated Guided Vehicles (AGVs) in logistics<br/>• Industry 4.0 wireless robotics & telemetry"]
+
+    Root --> D1
+    Root --> D2
+    Root --> D3
+    Root --> D4
+    Root --> D5
+    Root --> D6
+
+    classDef central fill:#1e293b,stroke:#38bdf8,stroke-width:2px,color:#ffffff,font-weight:bold
 ```
 
 ---
